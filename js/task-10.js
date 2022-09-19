@@ -6,13 +6,13 @@ const createBtn = document.querySelector('[data-create]');
 const destroyBtn = document.querySelector('[data-destroy]');
 const boxes = document.querySelector('#boxes');
 let boxSize = 20;
-const boxSet = new Set();
 let amount = 0;
-const onInput = () => {
+const boxSet = new Set();
+function onInput() {
   amount = Number(input.value);
   return amount;
 }
-const createBoxes = () => {
+function createBoxes(amount) {
   for (let i = 0; i < amount; i += 1) {
     boxSize += 10;
     const createdBox = document.createElement('div');
@@ -20,14 +20,14 @@ const createBoxes = () => {
     createdBox.style.height = boxSize + 'px';
     createdBox.style.backgroundColor = getRandomHexColor();
     boxSet.add(createdBox);
-    boxes.append(...boxSet);
   }
+  boxes.append(...boxSet);
 };
-const destroyAllBoxes = () => {
+function destroyAllBoxes() {
   boxes.innerHTML = '';
   boxSet.clear();
   boxSize = 20;
 };
 input.addEventListener('input', onInput);
-createBtn.addEventListener('click', createBoxes);
+createBtn.addEventListener('click', () => createBoxes(amount));
 destroyBtn.addEventListener('click', destroyAllBoxes);
